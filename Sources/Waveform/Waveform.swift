@@ -34,7 +34,7 @@ public struct Waveform: NSViewRepresentable {
         var renderer: Renderer
 
         init(constants: Constants) {
-            renderer = Renderer(device: MTLCreateSystemDefaultDevice()!)
+            renderer = Renderer(device: MTLCopyAllDevices().first!!)
             renderer.constants = constants
         }
     }
@@ -47,7 +47,7 @@ public struct Waveform: NSViewRepresentable {
     /// Required by NSViewRepresentable
     public func makeNSView(context: Context) -> some NSView {
         let metalView = MTKView(frame: CGRect(x: 0, y: 0, width: 1024, height: 768),
-                                device: MTLCreateSystemDefaultDevice()!)
+                                device: MTLCopyAllDevices().first!)
         metalView.enableSetNeedsDisplay = true
         metalView.isPaused = true
         metalView.delegate = context.coordinator.renderer
@@ -97,7 +97,7 @@ public struct Waveform: UIViewRepresentable {
         var renderer: Renderer
 
         init(constants: Constants) {
-            renderer = Renderer(device: MTLCreateSystemDefaultDevice()!)
+            renderer = Renderer(device: MTLCopyAllDevices().first!)
         }
     }
 
@@ -109,7 +109,7 @@ public struct Waveform: UIViewRepresentable {
     /// Required by UIViewRepresentable
     public func makeUIView(context: Context) -> some UIView {
         let metalView = MTKView(frame: CGRect(x: 0, y: 0, width: 1024, height: 768),
-                                device: MTLCreateSystemDefaultDevice()!)
+                                device: MTLCopyAllDevices().first!)
         metalView.enableSetNeedsDisplay = true
         metalView.isPaused = true
         metalView.delegate = context.coordinator.renderer
