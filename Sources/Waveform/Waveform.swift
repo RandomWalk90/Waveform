@@ -34,7 +34,7 @@ public struct Waveform: NSViewRepresentable {
         var renderer: Renderer
 
         init(constants: Constants) {
-            renderer = Renderer(device: MTLCopyAllDevices().first!!)
+            renderer = Renderer(device: MTLCopyAllDevices().first)
             renderer.constants = constants
         }
     }
